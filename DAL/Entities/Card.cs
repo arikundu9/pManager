@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace pMan.DAL.Entities;
 
-[Table("user")]
-public partial class User
+[Table("card")]
+public partial class Card
 {
     [Key]
     [Column("id")]
@@ -25,12 +25,21 @@ public partial class User
     [Column("updated_by")]
     public long UpdatedBy { get; set; }
 
-    [InverseProperty("User")]
+    [Column("parent_list_id")]
+    public long ParentListId { get; set; }
+
+    [InverseProperty("Card")]
     public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();
 
-    [InverseProperty("CreatedByNavigation")]
-    public virtual ICollection<Card> CardCreatedByNavigations { get; } = new List<Card>();
+    [ForeignKey("CreatedBy")]
+    [InverseProperty("CardCreatedByNavigations")]
+    public virtual User CreatedByNavigation { get; set; } = null!;
 
-    [InverseProperty("UpdatedByNavigation")]
-    public virtual ICollection<Card> CardUpdatedByNavigations { get; } = new List<Card>();
+    [ForeignKey("ParentListId")]
+    [InverseProperty("Cards")]
+    public virtual List ParentList { get; set; } = null!;
+
+    [ForeignKey("UpdatedBy")]
+    [InverseProperty("CardUpdatedByNavigations")]
+    public virtual User UpdatedByNavigation { get; set; } = null!;
 }

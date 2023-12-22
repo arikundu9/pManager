@@ -16,62 +16,68 @@ public partial class pManDBContext : DbContext
     {
     }
 
-    public virtual DbSet<App> Apps { get; set; }
+    public virtual DbSet<Board> Boards { get; set; }
 
-    public virtual DbSet<Jwt> Jwts { get; set; }
+    public virtual DbSet<Card> Cards { get; set; }
 
-    public virtual DbSet<Key> Keys { get; set; }
+    public virtual DbSet<CardAssignedToUser> CardAssignedToUsers { get; set; }
 
-    public virtual DbSet<Role> Roles { get; set; }
+    public virtual DbSet<List> Lists { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:pManDBConnection");
+        => optionsBuilder.UseNpgsql("Name=ConnectionStrings:pManDBConnection");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<App>(entity =>
+        modelBuilder.Entity<Board>(entity =>
         {
-            entity.HasKey(e => e.Aid).HasName("App_PK");
-
-            entity.HasOne(d => d.JidNavigation).WithMany(p => p.Apps)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("App_FK");
+            entity.HasKey(e => e.Id).HasName("board_pk");
         });
 
-        modelBuilder.Entity<Jwt>(entity =>
+        modelBuilder.Entity<Card>(entity =>
         {
-            entity.HasKey(e => e.Jid).HasName("jwt_PK");
+            entity.HasKey(e => e.Id).HasName("card_pk");
 
-            entity.HasOne(d => d.KidNavigation).WithMany(p => p.Jwts)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("jwt_FK");
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.CardCreatedByNavigations)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_fk_created_by");
+
+            entity.HasOne(d => d.ParentList).WithMany(p => p.Cards)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_fk_in_list");
+
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.CardUpdatedByNavigations)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_fk_updated_by");
         });
 
-        modelBuilder.Entity<Key>(entity =>
+        modelBuilder.Entity<CardAssignedToUser>(entity =>
         {
-            entity.HasKey(e => e.Kid).HasName("keys_PK");
+            entity.HasKey(e => e.Id).HasName("card_assigned_to_user_pk");
+
+            entity.HasOne(d => d.Card).WithMany(p => p.CardAssignedToUsers)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_assigned_to_user_fk_card");
+
+            entity.HasOne(d => d.User).WithMany(p => p.CardAssignedToUsers)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("card_assigned_to_user_fk_user");
         });
 
-        modelBuilder.Entity<Role>(entity =>
+        modelBuilder.Entity<List>(entity =>
         {
-            entity.HasKey(e => e.Rid).HasName("role_PK");
+            entity.HasKey(e => e.Id).HasName("list_pk");
 
-            entity.HasOne(d => d.AidNavigation).WithMany(p => p.Roles)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("role_t_app_FK");
-
-            entity.HasOne(d => d.RP).WithMany(p => p.InverseRP).HasConstraintName("role_FK");
+            entity.HasOne(d => d.ParentBoard).WithMany(p => p.Lists)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("list_fk_board");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Uid).HasName("user_PK");
-
-            entity.HasOne(d => d.AidNavigation).WithMany(p => p.Users).HasConstraintName("user_FK");
-
-            entity.HasOne(d => d.RidNavigation).WithMany(p => p.Users).HasConstraintName("user_t_role_FK");
+            entity.HasKey(e => e.Id).HasName("user_pk");
         });
 
         OnModelCreatingPartial(modelBuilder);
