@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 /*------Database Connection------*/
 builder.Services.AddDbContext<pManDBContext>(options =>
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration.GetConnectionString("pManDBConnection"),
         ////options => options.CommandTimeout(999)
         options => options.EnableRetryOnFailure(10, TimeSpan.FromSeconds(5), null)
@@ -37,12 +37,12 @@ builder.Services.AddTransient<IAppService, AppService>();
 // builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
 
 builder.Services.AddControllers();
-builder.Services.AddApiVersioning(x =>
-{
-    x.DefaultApiVersion = new ApiVersion(1, 0);
-    x.AssumeDefaultVersionWhenUnspecified = true;
-    x.ReportApiVersions = true;
-});
+// builder.Services.AddApiVersioning(x =>
+// {
+//     x.DefaultApiVersion = new ApiVersion(1, 0);
+//     x.AssumeDefaultVersionWhenUnspecified = true;
+//     x.ReportApiVersions = true;
+// });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
