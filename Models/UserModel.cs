@@ -5,8 +5,8 @@ namespace pMan.Models{
         public TimeOnly UpdatedAt { get; set; }
         public long CreatedBy { get; set; }
         public long UpdatedBy { get; set; }
-        public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();
-        public virtual ICollection<Card> CardCreatedByNavigations { get; } = new List<Card>();
-        public virtual ICollection<Card> CardUpdatedByNavigations { get; } = new List<Card>();
+        public virtual ICollection<CardAssignedToUserModel> CardAssignedToUsers { get; } = new List<CardAssignedToUserModel>();
+        public virtual ICollection<CardModel> CardCreatedByNavigations { get; } = new List<CardModel>();
+        public virtual ICollection<CardModel> CardUpdatedByNavigations { get; } = new List<CardModel>();
     }
 }
