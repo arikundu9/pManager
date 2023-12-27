@@ -23,7 +23,7 @@ public partial class List
     public long CreatedBy { get; set; }
 
     [Column("updated_by")]
-    public long UpdatedBy { get; set; }
+    public long? UpdatedBy { get; set; }
 
     [Column("parent_board_id")]
     public long ParentBoardId { get; set; }

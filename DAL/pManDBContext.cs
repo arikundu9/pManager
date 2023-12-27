@@ -53,9 +53,7 @@ public partial class pManDBContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("card_fk_in_list");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.CardUpdatedByNavigations)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("card_fk_updated_by");
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.CardUpdatedByNavigations).HasConstraintName("card_fk_updated_by");
         });
 
         modelBuilder.Entity<CardAssignedToUser>(entity =>

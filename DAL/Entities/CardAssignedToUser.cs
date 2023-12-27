@@ -24,7 +24,7 @@ public partial class CardAssignedToUser
     public long CreatedBy { get; set; }
 
     [Column("updated_by")]
-    public long UpdatedBy { get; set; }
+    public long? UpdatedBy { get; set; }
 
     [Column("card_id")]
     public long CardId { get; set; }

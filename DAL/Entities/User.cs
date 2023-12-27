@@ -23,7 +23,7 @@ public partial class User
     public long CreatedBy { get; set; }
 
     [Column("updated_by")]
-    public long UpdatedBy { get; set; }
+    public long? UpdatedBy { get; set; }
 
     [InverseProperty("User")]
     public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();

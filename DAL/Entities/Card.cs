@@ -23,7 +23,7 @@ public partial class Card
     public long CreatedBy { get; set; }
 
     [Column("updated_by")]
-    public long UpdatedBy { get; set; }
+    public long? UpdatedBy { get; set; }
 
     [Column("parent_list_id")]
     public long ParentListId { get; set; }
@@ -44,5 +44,5 @@ public partial class Card
 
     [ForeignKey("UpdatedBy")]
     [InverseProperty("CardUpdatedByNavigations")]
-    public virtual User UpdatedByNavigation { get; set; } = null!;
+    public virtual User? UpdatedByNavigation { get; set; }
 }
