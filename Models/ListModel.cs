@@ -7,7 +7,7 @@ namespace pMan.Models{
         public long UpdatedBy { get; set; }
         public long ParentBoardId { get; set; }
         public long OrderValue { get; set; }
-        public virtual ICollection<Card> Cards { get; } = new List<Card>();
-        public virtual Board ParentBoard { get; set; } = null!;
+        public virtual ICollection<CardModel> Cards { get; } = new List<CardModel>();
+        public virtual BoardModel ParentBoard { get; set; } = null!;
     }
 }

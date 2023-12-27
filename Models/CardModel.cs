@@ -7,9 +7,9 @@ namespace pMan.Models{
         public long UpdatedBy { get; set; }
         public long ParentListId { get; set; }
         public long OrderValue { get; set; }
-        public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();
-        public virtual User CreatedByNavigation { get; set; } = null!;
-        public virtual List ParentList { get; set; } = null!;
-        public virtual User UpdatedByNavigation { get; set; } = null!;
+        public virtual ICollection<CardAssignedToUserModel> CardAssignedToUsers { get; } = new List<CardAssignedToUserModel>();
+        public virtual UserModel CreatedByNavigation { get; set; } = null!;
+        public virtual ListModel ParentList { get; set; } = null!;
+        public virtual UserModel UpdatedByNavigation { get; set; } = null!;
     }
 }
