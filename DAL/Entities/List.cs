@@ -28,8 +28,8 @@ public partial class List
     [Column("parent_board_id")]
     public long ParentBoardId { get; set; }
 
-    [Column("ll_parent")]
-    public long LlParent { get; set; }
+    [Column("order_value")]
+    public long OrderValue { get; set; }
 
     [InverseProperty("ParentList")]
     public virtual ICollection<Card> Cards { get; } = new List<Card>();

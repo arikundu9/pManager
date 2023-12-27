@@ -28,6 +28,9 @@ public partial class Card
     [Column("parent_list_id")]
     public long ParentListId { get; set; }
 
+    [Column("order_value")]
+    public long OrderValue { get; set; }
+
     [InverseProperty("Card")]
     public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();
 
