@@ -21,8 +21,6 @@ namespace pMan.BAL
         {
             Board boardEntry = _mapper.Map<Board>(board);
             boardEntry.CreatedBy = 1;
-            boardEntry.UpdatedBy = 1;
-            boardEntry.UpdatedAt = new DateTime();
             _BoardRepo.Add(_mapper.Map<Board>(board));
             _BoardRepo.SaveChangesManaged();
         }
