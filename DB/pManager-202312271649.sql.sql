@@ -72,7 +72,7 @@ CREATE PROCEDURE public.create_table(IN tabname character varying)
                         'id bigserial NOT NULL,',
                         'id bigserial NOT NULL,',
                         'created_at timestamp without time zone NOT NULL,',
-                        'updated_at timestamp without time zone NOT NULL,',
+                        'updated_at timestamp without time zone NULL,',
                         'created_by bigint NOT NULL,',
                         'updated_by bigint NULL,',
                         'CONSTRAINT ' || tabname || '_pk PRIMARY KEY (id)',
@@ -95,7 +95,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public.board (
     id bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NULL,
     created_by bigint NOT NULL,
     updated_by bigint NULL,
     name character(30) NOT NULL
@@ -132,7 +132,7 @@ ALTER SEQUENCE public.board_id_seq OWNED BY public.board.id;
 CREATE TABLE public.card (
     id bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NULL,
     created_by bigint NOT NULL,
     updated_by bigint NULL,
     parent_list_id bigint NOT NULL,
@@ -148,7 +148,7 @@ CREATE TABLE public.card (
 CREATE TABLE public.card_assigned_to_user (
     id bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NULL,
     created_by bigint NOT NULL,
     updated_by bigint NULL,
     card_id bigint NOT NULL,
@@ -208,7 +208,7 @@ ALTER SEQUENCE public.card_id_seq OWNED BY public.card.id;
 CREATE TABLE public.list (
     id bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NULL,
     created_by bigint NOT NULL,
     updated_by bigint NULL,
     parent_board_id bigint NOT NULL,
@@ -246,7 +246,7 @@ ALTER SEQUENCE public.list_id_seq OWNED BY public.list.id;
 CREATE TABLE public."user" (
     id bigint NOT NULL,
     created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NULL,
     created_by bigint NOT NULL,
     updated_by bigint NULL
 );
