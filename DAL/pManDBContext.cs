@@ -34,11 +34,15 @@ public partial class pManDBContext : DbContext
         modelBuilder.Entity<Board>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("board_pk");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
         });
 
         modelBuilder.Entity<Card>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("card_pk");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.CardCreatedByNavigations)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -57,6 +61,8 @@ public partial class pManDBContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("card_assigned_to_user_pk");
 
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+
             entity.HasOne(d => d.Card).WithMany(p => p.CardAssignedToUsers)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("card_assigned_to_user_fk_card");
@@ -70,6 +76,8 @@ public partial class pManDBContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("list_pk");
 
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+
             entity.HasOne(d => d.ParentBoard).WithMany(p => p.Lists)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("list_fk_board");
@@ -78,6 +86,8 @@ public partial class pManDBContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("user_pk");
+
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
         });
 
         OnModelCreatingPartial(modelBuilder);
