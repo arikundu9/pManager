@@ -23,7 +23,13 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Add services to the container.
 //Repositories
+builder.Services.AddTransient<IBoardRepo, BoardRepo>();
+builder.Services.AddTransient<IListRepo, ListRepo>();
+builder.Services.AddTransient<ICardRepo, CardRepo>();
 //Services
+builder.Services.AddTransient<IBoardService, BoardService>();
+builder.Services.AddTransient<IListService, ListService>();
+builder.Services.AddTransient<ICardService, CardService>();
 // builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
 
 builder.Services.AddControllers();
