@@ -25,6 +25,10 @@ public partial class Board
     [Column("updated_by")]
     public long UpdatedBy { get; set; }
 
+    [Column("name")]
+    [StringLength(30)]
+    public string Name { get; set; } = null!;
+
     [InverseProperty("ParentBoard")]
     public virtual ICollection<List> Lists { get; } = new List<List>();
 }

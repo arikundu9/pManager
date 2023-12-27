@@ -36,6 +36,7 @@ public partial class pManDBContext : DbContext
             entity.HasKey(e => e.Id).HasName("board_pk");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+            entity.Property(e => e.Name).IsFixedLength();
         });
 
         modelBuilder.Entity<Card>(entity =>
