@@ -1,4 +1,5 @@
 using AutoMapper;
+using NPOI.SS.Formula.Functions;
 using pMan.BAL.Interface;
 using pMan.DAL.Entities;
 using pMan.DAL.Interfaces;
@@ -18,7 +19,12 @@ namespace pMan.BAL
 
         public void Add(BoardDto board)
         {
+            Board boardEntry = _mapper.Map<Board>(board);
+            boardEntry.CreatedBy = 1;
+            boardEntry.UpdatedBy = 1;
+            boardEntry.UpdatedAt = new DateTime();
             _BoardRepo.Add(_mapper.Map<Board>(board));
+            _BoardRepo.SaveChangesManaged();
         }
 
         public List<BoardModel> GetAll()
