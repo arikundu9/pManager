@@ -9,9 +9,19 @@ namespace pMan.BAL
     {
         private readonly IBoardRepo _BoardRepo;
         private readonly IMapper _mapper;
-        public BoardService(IBoardRepo BoardRepo, IMapper mapper) {
+        public BoardService(IBoardRepo BoardRepo, IMapper mapper)
+        {
             _BoardRepo = BoardRepo;
             _mapper = mapper;
+        }
+
+        public List<BoardModel> GetAll()
+        {
+            return _mapper.Map<List<BoardModel>>(_BoardRepo.GetAll().ToList());
+        }
+        public async Task<List<BoardModel>> GetAllAsync()
+        {
+            return _mapper.Map<List<BoardModel>>(await _BoardRepo.GetAllAsync());
         }
     }
 }

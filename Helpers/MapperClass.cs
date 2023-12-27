@@ -1,4 +1,6 @@
 using AutoMapper;
+using pMan.DAL.Entities;
+
 // using pMan.DAL.Entities;
 using pMan.DAL.Enums;
 using pMan.Models;
@@ -9,7 +11,8 @@ namespace pMan.Helpers
     {
         public MapperClass()
         {
-            // CreateMap<B, A>();
+            CreateMap<BoardModel, Board>();
+            CreateMap<Board, BoardModel>();
         }
     }
 }
