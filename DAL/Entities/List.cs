@@ -13,11 +13,11 @@ public partial class List
     [Column("id")]
     public long Id { get; set; }
 
-    [Column("created_at")]
-    public TimeOnly CreatedAt { get; set; }
+    [Column("created_at", TypeName = "timestamp without time zone")]
+    public DateTime CreatedAt { get; set; }
 
-    [Column("updated_at")]
-    public TimeOnly UpdatedAt { get; set; }
+    [Column("updated_at", TypeName = "timestamp without time zone")]
+    public DateTime UpdatedAt { get; set; }
 
     [Column("created_by")]
     public long CreatedBy { get; set; }
