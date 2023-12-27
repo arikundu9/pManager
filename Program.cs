@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using pMan.BAL;
+// using pMan.BAL;
 using pMan.DAL;
 using pMan.DAL.Interfaces;
-using pMan.BAL.Interface;
+// using pMan.BAL.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,17 +23,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 // Add services to the container.
 //Repositories
-builder.Services.AddTransient<IUserRepo, UserRepo>();
-builder.Services.AddTransient<IRoleRepo, RoleRepo>();
-builder.Services.AddTransient<IKeyRepo, KeyRepo>();
-builder.Services.AddTransient<IJwtRepo, JwtRepo>();
-builder.Services.AddTransient<IAppRepo, AppRepo>();
 //Services
-builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IRoleService, RoleService>();
-builder.Services.AddTransient<IKeyService, KeyService>();
-builder.Services.AddTransient<IJwtService, JwtService>();
-builder.Services.AddTransient<IAppService, AppService>();
 // builder.Services.AddTransient<ITransactionRepo, TransactionRepo>();
 
 builder.Services.AddControllers();
