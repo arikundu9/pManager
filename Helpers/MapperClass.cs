@@ -3,6 +3,7 @@ using pMan.DAL.Entities;
 
 // using pMan.DAL.Entities;
 using pMan.DAL.Enums;
+using pMan.DTOs;
 using pMan.Models;
 
 namespace pMan.Helpers
@@ -13,6 +14,8 @@ namespace pMan.Helpers
         {
             CreateMap<BoardModel, Board>();
             CreateMap<Board, BoardModel>();
+            CreateMap<BoardDto, Board>();
+            CreateMap<Board, BoardDto>();
         }
     }
 }

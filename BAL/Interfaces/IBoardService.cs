@@ -1,3 +1,4 @@
+using pMan.DTOs;
 using pMan.Models;
 namespace pMan.BAL.Interface
 {
@@ -5,5 +6,6 @@ namespace pMan.BAL.Interface
     {
         List<BoardModel> GetAll();
         Task<List<BoardModel>> GetAllAsync();
+        void Add(BoardDto board);
     }
 }

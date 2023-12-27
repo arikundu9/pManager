@@ -2,6 +2,7 @@ using AutoMapper;
 using pMan.BAL.Interface;
 using pMan.DAL.Entities;
 using pMan.DAL.Interfaces;
+using pMan.DTOs;
 using pMan.Models;
 namespace pMan.BAL
 {
@@ -13,6 +14,11 @@ namespace pMan.BAL
         {
             _BoardRepo = BoardRepo;
             _mapper = mapper;
+        }
+
+        public void Add(BoardDto board)
+        {
+            _BoardRepo.Add(_mapper.Map<Board>(board));
         }
 
         public List<BoardModel> GetAll()

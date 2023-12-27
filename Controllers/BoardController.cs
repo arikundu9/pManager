@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using pMan.BAL.Interface;
+using pMan.DTOs;
 using pMan.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -33,6 +34,21 @@ namespace pMan.Controllers
             {
                 List<BoardModel> allBoards = await _boardService.GetAllAsync();
                 return Ok(new { success = true, data = allBoards });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, error = ex.Message });
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Post(BoardDto board)
+        {
+            try
+            {
+                _boardService.Add(board);
+                return Ok(new { success = true });
             }
             catch (Exception ex)
             {
