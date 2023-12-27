@@ -16,14 +16,23 @@ namespace pMan.Controllers
         {
             Configuration = configuration;
         }
+
         [HttpGet("Login")]
         [AllowAnonymous]
         public IActionResult Login()
         {
+            string jwtStr="eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhcHBsaWNhdGlvbiI6IntcIklkXCI6NixcIk5hbWVcIjpcIkUtQmlsbGluZ1wiLFwiTGV2ZWxzXCI6W3tcIklkXCI6OSxcIk5hbWVcIjpcIkRET1wiLFwiU2NvcGVcIjpbXCJCQUFBRUUwMDFcIl19XSxcIlJvbGVzXCI6W3tcIklkXCI6MjUsXCJOYW1lXCI6XCJhcHByb3ZlclwifV19IiwibmFtZWlkIjoiMjkiLCJuYW1lIjoiQXJpaml0IiwibmJmIjoxNzAzNjU4NjY5LCJleHAiOjE3MDM3NDUwNjksImlhdCI6MTcwMzY1ODY2OX0.PcvWrt_c7YtHqdRjPhfxy8BlljSAIQcdlL9Fhoyq4AoCQa41x5JCgammhoobYoMmuCMuKcCFynVEo-nqAvqnOQ";
+            return Ok(jwtStr);
+        }
+
+        [HttpGet("Validate")]
+        [AllowAnonymous]
+        public IActionResult Validate()
+        {
             try
             {
-                var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
-                //token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2ODI0ODQyMjQsImV4cCI6MTY4MjU3MDYyNCwiaWF0IjoxNjgyNDg0MjI0fQ.QwrkFyUe9rbM77TcMgWCIHvn50C-9K2tA30Nv4lRb3O8DJQaqxNX3j5Fie1dyzBt1t9zT9wdnViOOwMXxP9EVg";
+                // var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                var token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhcHBsaWNhdGlvbiI6IntcIklkXCI6NixcIk5hbWVcIjpcIkUtQmlsbGluZ1wiLFwiTGV2ZWxzXCI6W3tcIklkXCI6OSxcIk5hbWVcIjpcIkRET1wiLFwiU2NvcGVcIjpbXCJCQUFBRUUwMDFcIl19XSxcIlJvbGVzXCI6W3tcIklkXCI6MjUsXCJOYW1lXCI6XCJhcHByb3ZlclwifV19IiwibmFtZWlkIjoiMjkiLCJuYW1lIjoiQXJpaml0IiwibmJmIjoxNzAzNjU4NjY5LCJleHAiOjE3MDM3NDUwNjksImlhdCI6MTcwMzY1ODY2OX0.PcvWrt_c7YtHqdRjPhfxy8BlljSAIQcdlL9Fhoyq4AoCQa41x5JCgammhoobYoMmuCMuKcCFynVEo-nqAvqnOQ";
                 JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
                 JwtSecurityToken jwtToken = tokenHandler.ReadJwtToken(token);
 
@@ -33,7 +42,7 @@ namespace pMan.Controllers
                 return Ok(new
                 {
                     status = "ValidToken"
-                }); ;
+                });
             }
             catch (Exception ex)
             {
