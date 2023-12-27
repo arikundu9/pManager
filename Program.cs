@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-// using pMan.BAL;
+using pMan.BAL;
 using pMan.DAL;
 using pMan.DAL.Interfaces;
-// using pMan.BAL.Interface;
+using pMan.BAL.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
