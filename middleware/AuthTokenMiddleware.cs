@@ -38,6 +38,7 @@ namespace pMan.Middlewares
                 {
                     var RefreshedAccessTokenRecieved = false;
                     var authClaimModel = _tokenHelper.ValidateAndGetTokenClaims(token, out RefreshedAccessTokenRecieved);
+                    Console.WriteLine(authClaimModel);
                     if (authClaimModel != null)
                     {
                         context.Items["jwtClaims"] = authClaimModel;
