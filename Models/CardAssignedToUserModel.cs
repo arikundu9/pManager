@@ -1,8 +1,8 @@
 namespace pMan.Models{
     public class CardAssignedToUserModel {
         public long Id { get; set; }
-        public TimeOnly CreatedAt { get; set; }
-        public TimeOnly UpdatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public long CreatedBy { get; set; }
         public long UpdatedBy { get; set; }
         public long CardId { get; set; }
