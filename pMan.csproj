@@ -8,13 +8,13 @@
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
         <IsPackable>true</IsPackable>
         <NoWarn>1591</NoWarn>
+        <NoWarn>NU1701</NoWarn>
         <!-- suppress the waraning code "1591" -->
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection"
-            Version="12.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
         <PackageReference Include="itext7.pdfhtml" Version="4.0.5" />
-        <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
             <PrivateAssets>all</PrivateAssets>
@@ -25,8 +25,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design"
-            Version="6.0.13" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.13" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
         <PackageReference Include="NPOI" Version="2.6.0" />
         <PackageReference Include="Scriban" Version="5.7.0" />
