@@ -12,10 +12,10 @@ namespace pMan.Helpers
     {
         public MapperClass()
         {
-            CreateMap<BoardModel, Board>();
-            CreateMap<Board, BoardModel>();
-            CreateMap<BoardDto, Board>();
-            CreateMap<Board, BoardDto>();
+            CreateMap<BoardModel, Board>(MemberList.None).PreserveReferences();
+            CreateMap<Board, BoardModel>(MemberList.None).PreserveReferences();
+            CreateMap<BoardDto, Board>(MemberList.None).PreserveReferences();
+            CreateMap<Board, BoardDto>(MemberList.None).PreserveReferences();
         }
     }
 }
