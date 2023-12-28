@@ -7,8 +7,8 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
         <IsPackable>true</IsPackable>
-        <!-- <NoWarn>1591</NoWarn> -->
-        <!-- suppress the warning code "1591" -->
+        <NoWarn>1591</NoWarn>
+        <!-- suppress the waraning code "1591" -->
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection"

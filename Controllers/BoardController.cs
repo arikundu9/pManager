@@ -27,6 +27,9 @@ namespace pMan.Controllers
             _boardService = boardService;
         }
 
+        /// <summary>
+        /// Get list of boards unconditionally.
+        /// </summary>
         [HttpGet]
         public async Task<ActionResult> Index()
         {
