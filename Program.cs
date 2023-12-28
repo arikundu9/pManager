@@ -6,6 +6,8 @@ using pMan.BAL.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using pMan.Middlewares;
+using pMan.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,8 @@ builder.Services.AddTransient<IBoardRepo, BoardRepo>();
 builder.Services.AddTransient<IListRepo, ListRepo>();
 builder.Services.AddTransient<ICardRepo, CardRepo>();
 //Services
+builder.Services.AddTransient<ITokenHelper, TokenHelper>();
+builder.Services.AddSingleton<ITokencache, Tokencache>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICardAssignedToUserService, CardAssignedToUserService>();
 builder.Services.AddTransient<IBoardService, BoardService>();
@@ -90,9 +94,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("/buildId", () => Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString() );
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.UseDefaultFiles();
+
+app.UseFileServer();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAuthTokenMiddleware();
 
 app.MapControllers();
 

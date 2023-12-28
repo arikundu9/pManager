@@ -34,14 +34,14 @@ namespace pMan.Middlewares
             {
                 var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
-                 if (token != null)
+                if (token != null)
                 {
                     var RefreshedAccessTokenRecieved = false;
-                    var authClaimModel = _tokenHelper.ValidateAndGetTokenClaims(token , out RefreshedAccessTokenRecieved);
+                    var authClaimModel = _tokenHelper.ValidateAndGetTokenClaims(token, out RefreshedAccessTokenRecieved);
                     if (authClaimModel != null)
                     {
-                        context.Items["userclaimmodel"] = authClaimModel;
-                        if(RefreshedAccessTokenRecieved)
+                        context.Items["jwtClaims"] = authClaimModel;
+                        if (RefreshedAccessTokenRecieved)
                             context.Items["RefreshedAccessTokenRecieved"] = true;
                         await _next(context);
                     }
@@ -56,7 +56,7 @@ namespace pMan.Middlewares
                     await _next(context);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
                 if (ex.Message == "ErrorMessages.Invalid_token")
@@ -67,7 +67,7 @@ namespace pMan.Middlewares
                 else
                 {
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    await context.Response.WriteAsync("{ \"msg\":\"Error: Incorrect_creden or "+ex.ToString()+"\"}");
+                    await context.Response.WriteAsync("{ \"msg\":\"Error: Incorrect_creden or " + ex.ToString() + "\"}");
                 }
 
             }
