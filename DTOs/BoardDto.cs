@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace pMan.DTOs
 {
     public class BoardDto
     {
-        public required string Name { get; set; }
+        [Required]
+        public string? Name { get; set; }
     }
 }
