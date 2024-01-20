@@ -31,6 +31,9 @@ public partial class Card
     [Column("order_value")]
     public long OrderValue { get; set; }
 
+    [Column("body", TypeName = "character varying")]
+    public string? Body { get; set; }
+
     [InverseProperty("Card")]
     public virtual ICollection<CardAssignedToUser> CardAssignedToUsers { get; } = new List<CardAssignedToUser>();
 

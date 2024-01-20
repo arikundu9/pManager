@@ -76,6 +76,7 @@ public partial class pManDBContext : DbContext
             entity.HasKey(e => e.Id).HasName("list_pk");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+            entity.Property(e => e.Name).IsFixedLength();
 
             entity.HasOne(d => d.ParentBoard).WithMany(p => p.Lists)
                 .OnDelete(DeleteBehavior.ClientSetNull)

@@ -31,6 +31,10 @@ public partial class List
     [Column("order_value")]
     public long OrderValue { get; set; }
 
+    [Column("name")]
+    [StringLength(30)]
+    public string Name { get; set; } = null!;
+
     [InverseProperty("ParentList")]
     public virtual ICollection<Card> Cards { get; } = new List<Card>();
 
