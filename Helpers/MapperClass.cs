@@ -16,10 +16,10 @@ namespace pMan.Helpers
             CreateMap<Board, BoardModel>(MemberList.None).PreserveReferences();
             CreateMap<BoardDto, Board>(MemberList.None).PreserveReferences();
             CreateMap<Board, BoardDto>(MemberList.None).PreserveReferences();
-            CreateMap<ListInsertDto, pMan.DAL.Entities.List>();
-            CreateMap<pMan.DAL.Entities.List, ListInsertDto>();
-            CreateMap<ListModel, pMan.DAL.Entities.List>();
-            CreateMap<pMan.DAL.Entities.List, ListModel>();
+            CreateMap<ListInsertDto, pMan.DAL.Entities.List>(MemberList.None).PreserveReferences();
+            CreateMap<pMan.DAL.Entities.List, ListInsertDto>(MemberList.None).PreserveReferences();
+            CreateMap<ListModel, pMan.DAL.Entities.List>(MemberList.None).PreserveReferences();
+            CreateMap<pMan.DAL.Entities.List, ListModel>(MemberList.None).PreserveReferences();
         }
     }
 }
