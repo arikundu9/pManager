@@ -44,6 +44,7 @@ public partial class pManDBContext : DbContext
             entity.HasKey(e => e.Id).HasName("card_pk");
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
+            entity.Property(e => e.OrderValue).HasDefaultValueSql("currval('card_id_seq'::regclass)");
 
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.CardCreatedByNavigations)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -77,6 +78,7 @@ public partial class pManDBContext : DbContext
 
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("now()");
             entity.Property(e => e.Name).IsFixedLength();
+            entity.Property(e => e.OrderValue).HasDefaultValueSql("currval('list_id_seq'::regclass)");
 
             entity.HasOne(d => d.ParentBoard).WithMany(p => p.Lists)
                 .OnDelete(DeleteBehavior.ClientSetNull)

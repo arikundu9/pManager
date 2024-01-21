@@ -21,7 +21,6 @@ namespace pMan.BAL
             pMan.DAL.Entities.List listEntry = new()
             {
                 ParentBoardId = list.BoardId,
-                OrderValue = 0,
                 Name = list.Name,
                 CreatedBy = 1
             };
