@@ -18,13 +18,13 @@ namespace pMan.BAL
         public void Add(ListInsertDto list)
         {
             // pMan.DAL.Entities.List listEntry = _mapper.Map<pMan.DAL.Entities.List>(list);
-            pMan.DAL.Entities.List listEntry = new pMan.DAL.Entities.List()
+            pMan.DAL.Entities.List listEntry = new()
             {
                 ParentBoardId = list.BoardId,
                 OrderValue = 0,
-                Name = list.Name
+                Name = list.Name,
+                CreatedBy = 1
             };
-            listEntry.CreatedBy = 1;
             _ListRepo.Add(listEntry);
             _ListRepo.SaveChangesManaged();
         }
