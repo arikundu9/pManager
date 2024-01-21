@@ -20,7 +20,7 @@ namespace pMan.BAL
         public void Add(BoardDto board)
         {
             Board boardEntry = _mapper.Map<Board>(board);
-            boardEntry.CreatedBy = 1;
+            boardEntry.CreatedBy = 2;
             _BoardRepo.Add(boardEntry);
             _BoardRepo.SaveChangesManaged();
         }

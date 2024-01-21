@@ -20,6 +20,8 @@ namespace pMan.Helpers
             CreateMap<pMan.DAL.Entities.List, ListInsertDto>(MemberList.None).PreserveReferences();
             CreateMap<ListModel, pMan.DAL.Entities.List>(MemberList.None).PreserveReferences();
             CreateMap<pMan.DAL.Entities.List, ListModel>(MemberList.None).PreserveReferences();
+            CreateMap<CardModel, Card>(MemberList.None).PreserveReferences();
+            CreateMap<Card, CardModel>(MemberList.None).PreserveReferences();
         }
     }
 }

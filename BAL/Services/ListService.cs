@@ -22,7 +22,7 @@ namespace pMan.BAL
             {
                 ParentBoardId = list.BoardId,
                 Name = list.Name,
-                CreatedBy = 1
+                CreatedBy = 2
             };
             _ListRepo.Add(listEntry);
             _ListRepo.SaveChangesManaged();
