@@ -94,7 +94,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/buildId", () => Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString() );
+app.MapGet("/buildId", () => $"{{\"buildId\":\"{Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString()}\"}}" );
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
