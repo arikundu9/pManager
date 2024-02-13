@@ -8,6 +8,9 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using pMan.Middlewares;
 using pMan.Authentication;
+using static Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary;
+using Swashbuckle.AspNetCore.SwaggerUI;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,13 +67,14 @@ builder.Services.AddSwaggerGen(options =>
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
         Name = "Authorization",
-            Type = SecuritySchemeType.ApiKey,
-            Scheme = "Bearer",
-            BearerFormat = "JWT",
-            In = ParameterLocation.Header,
-            Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {
@@ -85,16 +89,54 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+// DTO validation response override
+builder.Services.Configure<ApiBehaviorOptions>(config =>
+{
+    config.InvalidModelStateResponseFactory =
+        ctx => new BadRequestObjectResult(
+            new
+            {
+                success = false,
+                result = ctx.ModelState.Values,
+                error = "DTO validation error :: result field specifies error location."
+            }
+        );
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsStaging())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // app.UseSwagger();
+    // app.UseSwaggerUI();
+    app.UseSwagger(options =>
+    {
+        options.SerializeAsV2 = true;
+    });
+    app.UseSwaggerUI(options =>
+    {
+        options.InjectStylesheet("/swagger-ui/swagger.css");
+        options.InjectJavascript("/swagger-ui/jquery-3.7.1.min.js");
+        options.InjectJavascript("/swagger-ui/swagger.js");
+        options.EnableFilter();
+        options.EnablePersistAuthorization();
+        options.EnableValidator();
+        options.EnableDeepLinking();
+        options.DisplayRequestDuration();
+        options.ShowExtensions();
+        options.DocumentTitle = "pManager API";
+        options.DocExpansion(DocExpansion.None);
+    });
 }
 
-app.MapGet("/buildId", () => $"{{\"buildId\":\"{Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString()}\"}}" );
+// app.MapGet("/buildId", () => $"{{\"buildId\":\"{Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString()}\"}}");
+app.MapGet("/buildId", () => JsonConvert.SerializeObject(
+                new
+                {
+                    buildid = Assembly.GetExecutingAssembly().ManifestModule.ModuleVersionId.ToString()
+                })
+            );
 
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
